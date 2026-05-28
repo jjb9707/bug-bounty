@@ -18,6 +18,9 @@ export async function loginUser(payload) {
   };
 }
 
-export async function refreshToken() {
-  return { token: signAccessToken({ sub: "usr_existing", role: "client" }) };
+export async function refreshToken(token) {
+  // Verify the refresh token
+  const decoded = verifyRefreshToken(token);
+  // Issue new access token
+  return { token: signAccessToken({ sub: decoded.sub, role: decoded.role }) };
 }

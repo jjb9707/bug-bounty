@@ -3,5 +3,9 @@ import { getNotifications, postNotification } from "../controllers/notificationC
 
 export const notificationRoutes = Router();
 
+export const notificationRoutes.use(authMiddleware);
+
+import { authMiddleware } from "../middleware/auth.js";
+
 notificationRoutes.get("/", getNotifications);
 notificationRoutes.post("/", postNotification);
